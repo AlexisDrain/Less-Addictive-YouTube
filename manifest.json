@@ -1,0 +1,23 @@
+{
+
+  "manifest_version": 2,
+  "name": "LessAddictingYoutube",
+  "version": "1.0",
+
+  "description": "Hide or Remove thumbnails from Youtube to make it less addicting.",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*", "*://*.google.com/*"],
+      "js": ["lessAddictingYoutube.js", "lessAddictingYoutube.css"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "options/options.html"
+  },
+
+  "permissions": [
+    "storage"
+  ]
+}
