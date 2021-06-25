@@ -1,30 +1,50 @@
 /*
+Default settings. If there is nothing in storage, use these values.
+*/
+var defaultSettings = {
+  comments: false,
+  thumbnails: false,
+  sidebar: false,
+  preview: false
+};
+var settings = defaultSettings;
+
+/*
 Store the currently selected settings using browser.storage.local.
 */
 function storeSettings() {
 
-  function getSince() {
-    const since = document.querySelector("#since");
-    return since.value;
-  }
-
   function getTypes() {
-    let dataTypes = [];
+    let save = {
+      thumbnails: false,
+      preview: false,
+      sidebar: false,
+      comments: false
+    };
+
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
     for (let item of checkboxes) {
-      if (item.checked) {
-        dataTypes.push(item.getAttribute("data-type"));
+      if(item.checked == true) {
+        if (item.getAttribute("data-type") == "thumbnails") {
+          save.thumbnails = true;
+        }
+        if (item.getAttribute("data-type") == "preview") {
+          save.preview = true;
+        }
+        if (item.getAttribute("data-type") == "sidebar") {
+          save.sidebar = true;
+        }
+        if (item.getAttribute("data-type") == "comments") {
+          save.comments = true;
+        }
       }
+      console.log(item)
     }
-    return dataTypes;
+    return save;
   }
 
-  const since = getSince();
   const dataTypes = getTypes();
-  browser.storage.local.set({
-    since,
-    dataTypes
-  });
+  browser.storage.local.set(dataTypes);
 }
 
 /*
@@ -32,16 +52,24 @@ Update the options UI with the settings values retrieved from storage,
 or the default settings if the stored settings are empty.
 */
 function updateUI(restoredSettings) {
-  const selectList = document.querySelector("#since");
-  selectList.value = restoredSettings.since;
 
+  console.log(restoredSettings);
   const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
   for (let item of checkboxes) {
-    if (restoredSettings.dataTypes.indexOf(item.getAttribute("data-type")) != -1) {
-      item.checked = true;
-    } else {
-      item.checked = false;
+    
+    if (item.getAttribute("data-type") == "thumbnails") {
+      item.checked = restoredSettings.thumbnails;
     }
+    if (item.getAttribute("data-type") == "preview") {
+      item.checked = restoredSettings.preview;
+    }
+    if (item.getAttribute("data-type") == "sidebar") {
+      item.checked = restoredSettings.sidebar;
+    }
+    if (item.getAttribute("data-type") == "comments") {
+      item.checked = restoredSettings.comments;
+    }
+
   }
 }
 
