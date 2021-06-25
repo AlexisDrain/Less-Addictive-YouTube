@@ -11,7 +11,7 @@ var defaultSettings = {
 var settings = defaultSettings;
 
 const CSS_thumbnail = "#thumbnail .yt-img-shadow { display: none; }";
-const CSS_thumbnail_preview = "#play.ytd-moving-thumbnail-renderer { display: none; }";
+const CSS_thumbnail_preview = ".ytd-moving-thumbnail-renderer { display: none; }";
 const CSS_sidebar = ".ytd-watch-next-secondary-results-renderer { display: none; }";
 const CSS_comments = ".ytd-comments { display: none; }";
 
