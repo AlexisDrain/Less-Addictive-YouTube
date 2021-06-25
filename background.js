@@ -2,6 +2,7 @@
 Default settings. If there is nothing in storage, use these values.
 */
 var defaultSettings = {
+  storedBefore: true,
   comments: false,
   thumbnails: false,
   sidebar: false,
@@ -19,13 +20,11 @@ const TITLE_APPLY = "Apply CSS";
 const TITLE_REMOVE = "Remove CSS";
 const APPLICABLE_PROTOCOLS = ["http:", "https:"];
 
-toggleCSS();
-
 /*
 Main function
 */
 function toggleCSS() {
-  console.log(settings.thumbnails);
+  console.log(settings);
 
   
   var customStyles = document.createElement('style');
@@ -68,18 +67,17 @@ function protocolIsApplicable(url) {
 }
 
 /*
-Initialize the page action: set icon and title, then show.
-Only operates on tabs whose URL's protocol is applicable.
+Initialize the page action
 */
-function initializePageAction(tab) {
-  if (protocolIsApplicable(tab.url)) {
-    browser.pageAction.setIcon({tabId: tab.id, path: "icons/off.svg"});
-    browser.pageAction.setTitle({tabId: tab.id, title: TITLE_APPLY});
-    browser.pageAction.show(tab.id);
-  }
+function initializePageAction() {
   
   const gettingStoredSettings = browser.storage.local.get();
-  gettingStoredSettings.then((result) => {settings = result}, onError);
+  gettingStoredSettings.then((result) => {
+    settings = result;
+    console.log("load options");
+    console.log(result);
+    toggleCSS();
+  }, onError);
 }
 
 
@@ -88,32 +86,10 @@ On startup, check whether we have stored settings.
 If we don't, then store the default settings.
 */
 function checkStoredSettings(storedSettings) {
-  if (!storedSettings.since || !storedSettings.dataTypes) {
+  if (storedSettings.storedBefore == false) {
     browser.storage.local.set(defaultSettings);
   }
 }
-
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(checkStoredSettings, onError);
-
-/*
-When first loaded, initialize the page action for all tabs.
-*/
-var gettingAllTabs = browser.tabs.query({});
-gettingAllTabs.then((tabs) => {
-  for (let tab of tabs) {
-    initializePageAction(tab);
-  }
-});
-
-/*
-Each time a tab is updated, reset the page action for that tab.
-*/
-browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
-  initializePageAction(tab);
-  toggleCSS();
-  console.log("update tab");
-});
 
 
 /*
@@ -123,4 +99,7 @@ function onError(e) {
   console.error(e);
 }
 
-browser.browserAction.onClicked.addListener(toggleCSS);
+const gettingStoredSettings = browser.storage.local.get();
+gettingStoredSettings.then(checkStoredSettings, onError);
+
+initializePageAction();

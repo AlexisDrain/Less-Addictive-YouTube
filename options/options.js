@@ -2,6 +2,7 @@
 Default settings. If there is nothing in storage, use these values.
 */
 var defaultSettings = {
+  storedBefore: false,
   comments: false,
   thumbnails: false,
   sidebar: false,
@@ -9,13 +10,15 @@ var defaultSettings = {
 };
 var settings = defaultSettings;
 
+
 /*
 Store the currently selected settings using browser.storage.local.
 */
 function storeSettings() {
-
+  console.log("change settings");
   function getTypes() {
     let save = {
+      storedBefore: true,
       thumbnails: false,
       preview: false,
       sidebar: false,
@@ -83,8 +86,7 @@ On opening the options page, fetch stored settings and update the UI with them.
 const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(updateUI, onError);
 
-/*
-On clicking the save button, save the currently selected settings.
-*/
-const saveButton = document.querySelector("#save-button");
-saveButton.addEventListener("click", storeSettings);
+document.getElementById("comments").addEventListener("click", storeSettings);
+document.getElementById("thumbnails").addEventListener("click", storeSettings);
+document.getElementById("sidebar").addEventListener("click", storeSettings);
+document.getElementById("preview").addEventListener("click", storeSettings)
