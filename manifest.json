@@ -6,7 +6,7 @@
   "version": "1.0",
   "homepage_url": "https://github.com/JesseDrain/Less-Addictive-YouTube",
   "icons": {
-    "48": "icons/logo.png"
+    "48": "icons/favicon4_144.png"
   },
 
   "content_scripts": [
@@ -22,7 +22,7 @@
   },
   
   "browser_action": {
-    "default_icon": "icons/logo.png",
+    "default_icon": "icons/favicon4_144.png",
     "default_title": "Less Addictive Youtube",
     "default_popup": "options/options.html"
   },
