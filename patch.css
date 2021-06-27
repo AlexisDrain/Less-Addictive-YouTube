@@ -1,0 +1,15 @@
+#thumbnail .yt-img-shadow {
+  display: none;
+}
+
+.ytd-moving-thumbnail-renderer {
+  display: none;
+}
+
+.ytd-watch-next-secondary-results-renderer {
+  display: none;
+}
+
+.ytd-comments {
+  display: none;
+}

@@ -10,10 +10,10 @@ var defaultSettings = {
 };
 var settings = defaultSettings;
 
-const CSS_thumbnail = "#thumbnail .yt-img-shadow { display: none; }";
-const CSS_thumbnail_preview = ".ytd-moving-thumbnail-renderer { display: none; }";
-const CSS_sidebar = ".ytd-watch-next-secondary-results-renderer { display: none; }";
-const CSS_comments = ".ytd-comments { display: none; }";
+//const CSS_thumbnail = "#thumbnail .yt-img-shadow { display: none; }";
+//const CSS_thumbnail_preview = ".ytd-moving-thumbnail-renderer { display: none; }";
+//const CSS_sidebar = ".ytd-watch-next-secondary-results-renderer { display: none; }";
+//const CSS_comments = ".ytd-comments { display: none; }";
 
 //yt-img-shadow
 const TITLE_APPLY = "Apply CSS";
@@ -29,30 +29,20 @@ function toggleCSS() {
   
   var customStyles = document.createElement('style');
   document.body.insertBefore(customStyles, document.body.firstChild);
+  
+  console.log(settings.thumbnails == undefined);
 
-  if(settings.thumbnails == false) {
-    customStyles.innerHTML += CSS_thumbnail;
-  } else {
-    console.log("don't add stuff")
-    //browser.tabs.removeCSS({code: CSS_thumbnail});
+  if(settings.thumbnails == undefined || settings.thumbnails == false) {
+    customStyles.innerHTML += "#thumbnail .yt-img-shadow { display: none; }";
   }
-  if(settings.preview == false) {
-    customStyles.innerHTML += CSS_thumbnail_preview;
-  } else {
-    console.log("don't add stuff2")
-    //browser.tabs.removeCSS({code: CSS_thumbnail_preview});
+  if(settings.preview == undefined || settings.preview == false) {
+    customStyles.innerHTML += ".ytd-moving-thumbnail-renderer { display: none; }";
   }
-  if(settings.sidebar == false) {
-    customStyles.innerHTML += CSS_sidebar;
-  } else {
-    console.log("don't add stuff3")
-    //browser.tabs.removeCSS({code: CSS_sidepanel});
+  if(settings.sidebar == undefined || settings.sidebar == false) {
+    customStyles.innerHTML += ".ytd-watch-next-secondary-results-renderer { display: none; }";
   }
-  if(settings.comments == false) {
-    customStyles.innerHTML += CSS_comments;
-  } else {
-    console.log("don't add stuff4")
-    //browser.tabs.removeCSS({code: CSS_comments});
+  if(settings.comments == undefined || settings.comments == false) {
+    customStyles.innerHTML += ".ytd-comments { display: none; }";
   }
 
 }
