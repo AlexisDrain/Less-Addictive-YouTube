@@ -5,10 +5,10 @@ Remove some elements from Youtube to make it less addictive. Mix and match betwe
 - Hide or show comments
 
 # Download
-#### Chrome
+#### Chrome https://chrome.google.com/webstore/detail/less-addictive-youtube/olhmbgdbpfpkpejldoihajphhilpdnle
 #### Firefox https://addons.mozilla.org/en-US/firefox/addon/less-addictive-youtube/
-#### Edge
-#### Opera
+#### Edge (Coming soon)
+#### Opera (Coming soon)
 
 # Screenshots
 ![Remove comments and sidebar](https://github.com/JesseDrain/Less-Addictive-YouTube/blob/main/screenshots/removecommentsandsidebar1280x800.png)
