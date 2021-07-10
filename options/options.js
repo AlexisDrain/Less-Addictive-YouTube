@@ -6,7 +6,9 @@ var defaultSettings = {
   comments: false,
   thumbnails: false,
   sidebar: false,
-  preview: false
+  preview: false,
+  nextvideos: false,
+  endvideos: false
 };
 var settings = defaultSettings;
 
@@ -22,7 +24,9 @@ function storeSettings() {
       thumbnails: false,
       preview: false,
       sidebar: false,
-      comments: false
+      comments: false,
+      nextvideos: false,
+      endvideos: false
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
@@ -39,6 +43,12 @@ function storeSettings() {
         }
         if (item.getAttribute("data-type") == "comments") {
           save.comments = true;
+        }
+        if (item.getAttribute("data-type") == "nextvideos") {
+          save.nextvideos = true;
+        }
+        if (item.getAttribute("data-type") == "endvideos") {
+          save.endvideos = true;
         }
       }
       console.log(item)
@@ -72,6 +82,12 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "comments") {
       item.checked = restoredSettings.comments;
     }
+    if (item.getAttribute("data-type") == "nextvideos") {
+      item.checked = restoredSettings.nextvideos;
+    }
+    if (item.getAttribute("data-type") == "endvideos") {
+      item.checked = restoredSettings.endvideos;
+    }
 
   }
 }
@@ -89,4 +105,6 @@ gettingStoredSettings.then(updateUI, onError);
 document.getElementById("comments").addEventListener("click", storeSettings);
 document.getElementById("thumbnails").addEventListener("click", storeSettings);
 document.getElementById("sidebar").addEventListener("click", storeSettings);
-document.getElementById("preview").addEventListener("click", storeSettings)
+document.getElementById("preview").addEventListener("click", storeSettings);
+document.getElementById("nextvideos").addEventListener("click", storeSettings);
+document.getElementById("endvideos").addEventListener("click", storeSettings);

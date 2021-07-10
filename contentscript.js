@@ -6,7 +6,9 @@ var defaultSettings = {
   comments: false,
   thumbnails: false,
   sidebar: false,
-  preview: false
+  preview: false,
+  nextvideos: false,
+  endvideos: false
 };
 var settings = defaultSettings;
 
@@ -24,8 +26,6 @@ const APPLICABLE_PROTOCOLS = ["http:", "https:"];
 Main function
 */
 function toggleCSS() {
-  console.log(settings);
-
   
   var customStyles = document.createElement('style');
   document.body.insertBefore(customStyles, document.body.firstChild);
@@ -43,6 +43,12 @@ function toggleCSS() {
   }
   if(settings.comments == undefined || settings.comments == false) {
     customStyles.innerHTML += ".ytd-comments { display: none; }";
+  }
+  if(settings.nextvideos == undefined || settings.nextvideos == false) {
+    customStyles.innerHTML += ".ytp-ce-video { display: none; } .ytp-ce-channel { display: none; }";
+  }
+  if(settings.endvideos == undefined || settings.endvideos == false) {
+    customStyles.innerHTML += ".ytp-endscreen-content { display: none; }";
   }
 
 }
@@ -64,8 +70,6 @@ function initializePageAction() {
   const gettingStoredSettings = browser.storage.local.get();
   gettingStoredSettings.then((result) => {
     settings = result;
-    console.log("load options");
-    console.log(result);
     toggleCSS();
   }, onError);
 }
