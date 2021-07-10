@@ -3,12 +3,11 @@ Remove some elements from Youtube to make it less addictive. Mix and match betwe
 - Hide or show thumbnails and video preview
 - Hide or show recommended videos sidebar
 - Hide or show comments
+- Hide or show recommended videos end screen (when autoplay is off)
 
 # Download
 #### Chrome https://chrome.google.com/webstore/detail/less-addictive-youtube/olhmbgdbpfpkpejldoihajphhilpdnle
 #### Firefox https://addons.mozilla.org/en-US/firefox/addon/less-addictive-youtube/
-#### Edge (Coming soon)
-#### Opera (Coming soon)
 
 # Screenshots
 ![Remove comments and sidebar](https://github.com/JesseDrain/Less-Addictive-YouTube/blob/main/screenshots/removecommentsandsidebar1280x800.png)
