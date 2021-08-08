@@ -3,7 +3,7 @@
   "description": "Remove some elements from Youtube (like thumbnails and comments) to make it less addicting.",
   "manifest_version": 2,
   "name": "Less-Addictive-Youtube",
-  "version": "1.36",
+  "version": "1.37",
   "author":"JesseDrain",
   "homepage_url": "https://github.com/JesseDrain/Less-Addictive-YouTube",
   "icons": {
@@ -13,7 +13,6 @@
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "run_at": "document_start",
       "js": ["browser-polyfill.js","contentscript.js"]
     }
   ],
