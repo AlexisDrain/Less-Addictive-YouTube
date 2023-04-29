@@ -32,7 +32,9 @@ function toggleCSS() {
   console.log(settings.thumbnails == undefined);
 
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
-    customStyles.innerHTML += "#thumbnail .yt-img-shadow { display: none; }";
+    customStyles.innerHTML += "#thumbnail .ytd-thumbnail { display: none; }";
+    customStyles.innerHTML +=
+      "#video-preview-container .ytd-video-preview { display: none; }";
   }
   if (settings.preview == undefined || settings.preview == false) {
     customStyles.innerHTML +=
