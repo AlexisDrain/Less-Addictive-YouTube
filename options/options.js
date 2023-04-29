@@ -8,10 +8,9 @@ var defaultSettings = {
   sidebar: false,
   preview: false,
   nextvideos: false,
-  endvideos: false
+  endvideos: false,
 };
 var settings = defaultSettings;
-
 
 /*
 Store the currently selected settings using browser.storage.local.
@@ -26,12 +25,12 @@ function storeSettings() {
       sidebar: false,
       comments: false,
       nextvideos: false,
-      endvideos: false
+      endvideos: false,
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
     for (let item of checkboxes) {
-      if(item.checked == true) {
+      if (item.checked == true) {
         if (item.getAttribute("data-type") == "thumbnails") {
           save.thumbnails = true;
         }
@@ -51,7 +50,7 @@ function storeSettings() {
           save.endvideos = true;
         }
       }
-      console.log(item)
+      console.log(item);
     }
     return save;
   }
@@ -65,11 +64,9 @@ Update the options UI with the settings values retrieved from storage,
 or the default settings if the stored settings are empty.
 */
 function updateUI(restoredSettings) {
-
   console.log(restoredSettings);
   const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
   for (let item of checkboxes) {
-    
     if (item.getAttribute("data-type") == "thumbnails") {
       item.checked = restoredSettings.thumbnails;
     }
@@ -88,7 +85,6 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "endvideos") {
       item.checked = restoredSettings.endvideos;
     }
-
   }
 }
 
