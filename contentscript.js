@@ -34,6 +34,8 @@ function toggleCSS() {
 
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
     customStyles.innerHTML += "#thumbnail .ytd-thumbnail { display: none; }";
+    customStyles.innerHTML +=
+      "#thumbnail .ytd-playlist-thumbnail { display: none; }";
   }
   if (settings.preview == undefined || settings.preview == false) {
     customStyles.innerHTML +=
