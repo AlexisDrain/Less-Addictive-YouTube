@@ -41,9 +41,7 @@ function toggleCSS() {
   }
   if (settings.preview == undefined || settings.preview == false) {
     customStyles.innerHTML +=
-      //   ".ytd-moving-thumbnail-renderer { display: none; }";
-      customStyles.innerHTML +=
-        "#video-preview-container .ytd-video-preview { display: none; }";
+      "#video-preview-container .ytd-video-preview { display: none; }";
   }
   if (settings.sidebar == undefined || settings.sidebar == false) {
     customStyles.innerHTML +=
