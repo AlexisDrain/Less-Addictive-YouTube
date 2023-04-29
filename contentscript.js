@@ -61,6 +61,9 @@ function toggleCSS() {
     // hide Shorts on the sidebars
     customStyles.innerHTML += '[aria-label="Shorts"] { display: none; }';
     customStyles.innerHTML += '[title="Shorts"] { display: none !important; }';
+    // hide Shorts on channel pages
+    customStyles.innerHTML +=
+      ":nth-child(3 of .tp-yt-paper-tabs > tp-yt-paper-tab) { display: none; }";
   }
   if (settings.shorts == undefined || settings.shorts == false) {
     // hide Explore on the sidebars
