@@ -36,6 +36,8 @@ function toggleCSS() {
     customStyles.innerHTML += "#thumbnail .ytd-thumbnail { display: none; }";
     customStyles.innerHTML +=
       "#thumbnail .ytd-playlist-thumbnail { display: none; }";
+    customStyles.innerHTML +=
+      ".thumbnail-container > yt-img-shadow { display: none !important; }";
   }
   if (settings.preview == undefined || settings.preview == false) {
     customStyles.innerHTML +=
@@ -66,6 +68,7 @@ function toggleCSS() {
     // hide Shorts on channel pages
     customStyles.innerHTML +=
       ":nth-child(3 of .tp-yt-paper-tabs > tp-yt-paper-tab) { display: none; }";
+    customStyles.innerHTML += "ytd-reel-shelf-renderer { display: none; }";
   }
   if (settings.shorts == undefined || settings.shorts == false) {
     // hide Explore on the sidebars
