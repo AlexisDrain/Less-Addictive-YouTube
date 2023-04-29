@@ -61,29 +61,19 @@ function toggleCSS() {
     // hide Shorts on the sidebars
     customStyles.innerHTML += '[aria-label="Shorts"] { display: none; }';
     customStyles.innerHTML += '[title="Shorts"] { display: none !important; }';
-    // hide the Shorts tab on channel pages
-    // not working at the moment
-    // d = document.getElementById("tabsContainer");
-    // if (!d) {
-    //   d = document.getElementById("tabs-container");
-    // }
-    // console.log(d);
-    // if (d) {
-    //   console.log("found tabsContainer");
-    //   d = d.getElementsByTagName("tp-yt-paper-tab");
-    //   // find the "tab-title" with the text "Shorts"
-    //   for (i = 0; i < d.length; i++) {
-    //     console.log(d[i]);
-    //     e = d[i].getElementsByClassName("tab-title");
-    //     console.log(e);
-    //     for (j = 0; j < e.length; j++) {
-    //       if (e[j].innerText == "Shorts") {
-    //         console.log("found Shorts tab");
-    //         d[i].style.display = "none";
-    //       }
-    //     }
-    //   }
-    // }
+  }
+  if (settings.shorts == undefined || settings.shorts == false) {
+    // hide Explore on the sidebars
+    customStyles.innerHTML += '[aria-label="Explore"] { display: none; }';
+    customStyles.innerHTML += '[title="Explore"] { display: none !important; }';
+    // hide sidebar sections
+    customStyles.innerHTML +=
+      ".ytd-guide-renderer:nth-child(3) { display: none; }";
+    customStyles.innerHTML +=
+      ".ytd-guide-renderer:nth-child(4) { display: none; }";
+    // hide filter
+    customStyles.innerHTML +=
+      "ytd-feed-filter-chip-bar-renderer { display: none; }";
   }
 }
 
