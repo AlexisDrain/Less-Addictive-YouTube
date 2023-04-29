@@ -1,11 +1,11 @@
 {
 
-  "description": "Remove some elements from Youtube (like thumbnails and comments) to make it less addicting.",
-  "manifest_version": 2,
-  "name": "Less-Addictive-Youtube",
-  "version": "1.37",
-  "author":"JesseDrain",
-  "homepage_url": "https://github.com/JesseDrain/Less-Addictive-YouTube",
+  "description": "Remove elements from YouTube (thumbnails, Shorts, or comments) to make it less addictive.",
+  "manifest_version": 3,
+  "name": "Less Addictive YouTube",
+  "version": "1.39",
+  "author":"AlexisDrain",
+  "homepage_url": "https://github.com/AlexisDrain/Less-Addictive-YouTube",
   "icons": {
     "144": "icons/favicon4_144.png"
   },
@@ -16,8 +16,7 @@
       "js": ["browser-polyfill.js","contentscript.js"]
     }
   ],
-  
-  "browser_action": {
+  "action": {
     "default_icon": "icons/favicon4_144.png",
     "default_title": "Less Addictive Youtube",
     "default_popup": "options/options.html"
