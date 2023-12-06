@@ -23,14 +23,22 @@ const TITLE_APPLY = "Apply CSS";
 const TITLE_REMOVE = "Remove CSS";
 const APPLICABLE_PROTOCOLS = ["http:", "https:"];
 
+var customStyles;
+function createStyle() {  // console.log("if style doesnt exist, create style");
+  customStyles = document.createElement("style");
+  customStyles.id = "LessAddictiveStyle";
+  document.documentElement.appendChild (customStyles);
+}
 /*
 Main function
 */
 function toggleCSS() {
-  var customStyles = document.createElement("style");
-  document.body.insertBefore(customStyles, document.body.firstChild);
 
-  console.log(settings.thumbnails == undefined);
+  if(customStyles == undefined) {
+    console.log("There's no Style. Abort");
+    return;
+  }
+  customStyles.innerHTML = "";
 
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
     customStyles.innerHTML += "#thumbnail .ytd-thumbnail { display: none; }";
@@ -68,7 +76,7 @@ function toggleCSS() {
       ":nth-child(3 of .tp-yt-paper-tabs > tp-yt-paper-tab) { display: none; }";
     customStyles.innerHTML += "ytd-reel-shelf-renderer { display: none; }";
   }
-  if (settings.shorts == undefined || settings.shorts == false) {
+  if (settings.explore == undefined || settings.explore == false) {
     // hide Explore on the sidebars
     customStyles.innerHTML += '[aria-label="Explore"] { display: none; }';
     customStyles.innerHTML += '[title="Explore"] { display: none !important; }';
@@ -77,9 +85,9 @@ function toggleCSS() {
       ".ytd-guide-renderer:nth-child(3) { display: none; }";
     customStyles.innerHTML +=
       ".ytd-guide-renderer:nth-child(4) { display: none; }";
-    // hide filter
-    customStyles.innerHTML +=
-      "ytd-feed-filter-chip-bar-renderer { display: none; }";
+    // hide filter -- these are the filters inside the channel pages (Latest, Popular, Oldest)
+    //customStyles.innerHTML +=
+    //  "ytd-feed-filter-chip-bar-renderer { display: none; }";
   }
 }
 
@@ -99,6 +107,7 @@ function initializePageAction() {
   const gettingStoredSettings = browser.storage.local.get();
   gettingStoredSettings.then((result) => {
     settings = result;
+    createStyle();
     toggleCSS();
   }, onError);
 }
@@ -124,3 +133,14 @@ const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(checkStoredSettings, onError);
 
 initializePageAction();
+
+// https://stackoverflow.com/questions/14765434/chrome-extension-options-js-notify-content-script-js-of-settings-change
+// refresh page on option change
+
+browser.storage.onChanged.addListener(function(changes, namespace) {
+  const gettingStoredSettings = browser.storage.local.get();
+  gettingStoredSettings.then((result) => {
+    settings = result;
+    toggleCSS();
+  }, onError);
+});

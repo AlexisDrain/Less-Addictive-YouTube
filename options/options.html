@@ -11,6 +11,23 @@
     <section class="clear-options data-types">
       <div class="title">Youtube options:</div>
 
+      <p class="title">General:</p>
+      <label
+        >Show video thumbnails<input
+          id="thumbnails"
+          type="checkbox"
+          data-type="thumbnails"
+      /></label>
+      
+      <label
+        >Show video preview on mouse over<input
+          id="preview"
+          type="checkbox"
+          data-type="preview"
+      /></label>
+
+      <p class="title">In video:</p>
+
       <label
         >Show video comments<input
           id="comments"
@@ -18,22 +35,10 @@
           data-type="comments"
       /></label>
       <label
-        >Show video thumbnails<input
-          id="thumbnails"
-          type="checkbox"
-          data-type="thumbnails"
-      /></label>
-      <label
         >Show suggested videos sidebar<input
           id="sidebar"
           type="checkbox"
           data-type="sidebar"
-      /></label>
-      <label
-        >Show video preview on mouse over<input
-          id="preview"
-          type="checkbox"
-          data-type="preview"
       /></label>
       <label
         >Show recommended channel & 2 videos end screen<input
@@ -47,6 +52,9 @@
           type="checkbox"
           data-type="endvideos"
       /></label>
+      
+      <p class="title">Misc:</p>
+
       <label
         >Show YouTube Shorts<input
           id="shorts"
@@ -60,7 +68,6 @@
           data-type="explore"
       /></label>
 
-      <p>Reload page to see results.</p>
     </section>
 
     <script src="options.js"></script>

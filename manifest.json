@@ -12,6 +12,7 @@
 
   "content_scripts": [
     {
+      "run_at": "document_start",
       "matches": ["*://*.youtube.com/*"],
       "js": ["browser-polyfill.js","contentscript.js"]
     }
