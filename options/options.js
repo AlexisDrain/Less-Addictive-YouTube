@@ -3,8 +3,10 @@ Default settings. If there is nothing in storage, use these values.
 */
 var defaultSettings = {
   storedBefore: false,
-  comments: false,
+  comments: true,
   thumbnails: false,
+  videoTime: true,
+  videoWatched: true,
   sidebar: false,
   preview: false,
   nextvideos: false,
@@ -23,6 +25,8 @@ function storeSettings() {
     let save = {
       storedBefore: true,
       thumbnails: false,
+      videoTime: false,
+      videoWatched: false,
       preview: false,
       sidebar: false,
       comments: false,
@@ -37,6 +41,12 @@ function storeSettings() {
       if (item.checked == true) {
         if (item.getAttribute("data-type") == "thumbnails") {
           save.thumbnails = true;
+        }
+        if (item.getAttribute("data-type") == "videoTime") {
+          save.videoTime = true;
+        }
+        if (item.getAttribute("data-type") == "videoWatched") {
+          save.videoWatched = true;
         }
         if (item.getAttribute("data-type") == "preview") {
           save.preview = true;
@@ -80,6 +90,12 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "thumbnails") {
       item.checked = restoredSettings.thumbnails;
     }
+    if (item.getAttribute("data-type") == "videoTime") {
+      item.checked = restoredSettings.videoTime;
+    }
+    if (item.getAttribute("data-type") == "videoWatched") {
+      item.checked = restoredSettings.videoWatched;
+    }
     if (item.getAttribute("data-type") == "preview") {
       item.checked = restoredSettings.preview;
     }
@@ -116,6 +132,8 @@ gettingStoredSettings.then(updateUI, onError);
 
 document.getElementById("comments").addEventListener("click", storeSettings);
 document.getElementById("thumbnails").addEventListener("click", storeSettings);
+document.getElementById("videoTime").addEventListener("click", storeSettings);
+document.getElementById("videoWatched").addEventListener("click", storeSettings);
 document.getElementById("sidebar").addEventListener("click", storeSettings);
 document.getElementById("preview").addEventListener("click", storeSettings);
 document.getElementById("nextvideos").addEventListener("click", storeSettings);

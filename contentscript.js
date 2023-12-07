@@ -3,8 +3,10 @@ Default settings. If there is nothing in storage, use these values.
 */
 var defaultSettings = {
   storedBefore: true,
-  comments: false,
+  comments: true,
   thumbnails: false,
+  videoTime: true,
+  videoWatched: true,
   sidebar: false,
   preview: false,
   nextvideos: false,
@@ -41,15 +43,32 @@ function toggleCSS() {
   customStyles.innerHTML = "";
 
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
-    customStyles.innerHTML += "#thumbnail .ytd-thumbnail { display: none; }";
-    customStyles.innerHTML +=
-      "#thumbnail .ytd-playlist-thumbnail { display: none; }";
+    customStyles.innerHTML += ".yt-core-image { display: none; }";
     customStyles.innerHTML +=
       ".thumbnail-container > yt-img-shadow { display: none !important; }";
   }
+  if (settings.videoTime == undefined || settings.videoTime == false) {
+      customStyles.innerHTML +=
+        ".ytd-thumbnail-overlay-time-status-renderer { display: none; }"; // total time of video. Example: 3:15
+  } else {
+          customStyles.innerHTML +=
+    "#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
+  }
+  if(settings.videoWatched == undefined || settings.videoWatched == false) {
+    customStyles.innerHTML +=
+      ".ytd-thumbnail-overlay-resume-playback-renderer { display: none; }"; // red bar below video thumbnail (how much you've watched)
+  } else {
+    customStyles.innerHTML +=
+"#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
+  }
+
   if (settings.preview == undefined || settings.preview == false) {
     customStyles.innerHTML +=
       "#video-preview-container .ytd-video-preview { display: none; }";
+      customStyles.innerHTML +=
+        "#mouseover-overlay .ytd-thumbnail { display: none; }";
+        customStyles.innerHTML +=
+          "#hover-overlays .ytd-thumbnail { display: none; }";
   }
   if (settings.sidebar == undefined || settings.sidebar == false) {
     customStyles.innerHTML +=
