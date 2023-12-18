@@ -32,6 +32,16 @@ function createStyle() {  // console.log("if style doesnt exist, create style");
   customStyles.id = "LessAddictiveStyle";
   document.documentElement.appendChild (customStyles);
 }
+
+function makeSureStyleIsLast() {
+  if(customStyles) {
+      if(document.documentElement.lastElementChild.id != "LessAddictiveStyle") {
+          console.log("LessAddictiveStyle was not last");
+          document.documentElement.appendChild (customStyles);
+      }
+  }
+}
+
 /*
 Main function
 */
@@ -168,5 +178,7 @@ browser.storage.onChanged.addListener(function(changes, namespace) {
 
 // const gettingStoredSettings = browser.storage.local.get();
 // gettingStoredSettings.then(checkStoredSettings, onError);
+
+setInterval(makeSureStyleIsLast, 2000); // make sure that the main style element is the last on this page (Cascading style), otherwise the plugin may not work.
 
 initializePageAction();

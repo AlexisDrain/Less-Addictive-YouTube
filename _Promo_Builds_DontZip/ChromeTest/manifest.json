@@ -3,7 +3,7 @@
   "description": "Remove elements from YouTube (thumbnails, Shorts, or comments) to make it less addictive.",
   "manifest_version": 3,
   "name": "Less Addictive YouTube",
-  "version": "1.42",
+  "version": "1.43",
   "author":"AlexisDrain",
   "homepage_url": "https://github.com/AlexisDrain/Less-Addictive-YouTube",
   "icons": {

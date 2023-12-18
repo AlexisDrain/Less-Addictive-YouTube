@@ -23,16 +23,19 @@ Remove some elements from YouTube to make it less addictive. Mix and match betwe
 Some recent features were developed by https://github.com/pfandzelter  
 https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/5  
 
-## Changelog
+## Changelog  
+
+(12-17-2023):
+- Fixed bug where extension doesn't work after opening a new YouTube tab.  
 
 (12-07-2023):
 New Features:
-- Extension now displays your changes immediately. No need to F5/Refresh to see your new settings.
-- Extension now works before any of the DOM objects are rendered. No more tiny flash of hidden content being shown when you reload the page.
-- Slightly cleaner options menu with labels above each category (Thumbnails, In video, Misc).
-- Option: make video length visible even with no thumbnail.
-- Option: show how much you've watched from the video (the red bar below the thumbnails)
+- Extension now displays your changes immediately. No need to F5/Refresh to see your new settings.  
+- Extension now works before any of the DOM objects are rendered. No more tiny flash of hidden content being shown when you reload the page.  
+- Slightly cleaner options menu with labels above each category (Thumbnails, In video, Misc).  
+- Option: make video length visible even with no thumbnail.  
+- Option: show how much you've watched from the video (the red bar below the thumbnails)  
 
 Bug fixes: 
-- Bug fix: "Show Explore content" is now separate from Shorts.
-- Bug fix: unchecking "Show Explore content" used to remove the "Latest, Popular, Oldest" sorting on channel pages.
+- Bug fix: "Show Explore content" is now separate from Shorts.  
+- Bug fix: unchecking "Show Explore content" used to remove the "Latest, Popular, Oldest" sorting on channel pages.  
