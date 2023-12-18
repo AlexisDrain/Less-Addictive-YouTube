@@ -25,6 +25,10 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(12-18-2023) v1.44: 
+
+- Changed logo due to copyright strike. 
+
 (12-17-2023) v1.43: 
 
 - Fixed bug where extension doesn't work after opening a new YouTube tab.  
