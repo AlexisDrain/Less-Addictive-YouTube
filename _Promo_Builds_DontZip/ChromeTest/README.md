@@ -25,6 +25,10 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(1-10-2024) v1.45: 
+
+- New feature: Added option to show/hide videos on the front page. 
+
 (12-18-2023) v1.44: 
 
 - Changed logo due to copyright strike. 

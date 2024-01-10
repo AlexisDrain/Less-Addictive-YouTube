@@ -11,7 +11,9 @@ var defaultSettings = {
   preview: false,
   nextvideos: false,
   endvideos: false,
+  homepage: false,
   shorts: false,
+  explore: false,
 };
 
 var settings;
@@ -95,6 +97,14 @@ function toggleCSS() {
   if (settings.endvideos == undefined || settings.endvideos == false) {
     customStyles.innerHTML += ".ytp-endscreen-content { display: none; }";
   }
+
+    // hide videos on home page
+  if (settings.homepage == undefined || settings.homepage == false) {
+    if(document.location.pathname == '/' ) { // subscription/channel pages uses the same tag and class as homepage. so make sure we're in the homepage
+      customStyles.innerHTML += "#contents .ytd-rich-grid-renderer { display: none; }";
+    }
+  }
+  
   if (settings.shorts == undefined || settings.shorts == false) {
     // hide Shorts section on the front page
     customStyles.innerHTML += ".ytd-rich-section-renderer { display: none; }";
@@ -176,8 +186,13 @@ browser.storage.onChanged.addListener(function(changes, namespace) {
   }, onError);
 });
 
-// const gettingStoredSettings = browser.storage.local.get();
-// gettingStoredSettings.then(checkStoredSettings, onError);
+// needed to hide videos on home page
+document.addEventListener('yt-navigate-finish', function() {
+  if(customStyles == undefined) {
+    return;
+  }
+  toggleCSS();
+});
 
 setInterval(makeSureStyleIsLast, 2000); // make sure that the main style element is the last on this page (Cascading style), otherwise the plugin may not work.
 
