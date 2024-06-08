@@ -12,6 +12,7 @@ var defaultSettings = {
   nextvideos: false,
   endvideos: false,
   homepage: false,
+  subs: true,
   shorts: false,
   explore: false,
 };
@@ -85,7 +86,10 @@ function toggleCSS() {
   }
   if (settings.sidebar == undefined || settings.sidebar == false) {
     customStyles.innerHTML +=
-      ".ytd-watch-next-secondary-results-renderer { display: none; }";
+      ".ytd-watch-next-secondary-results-renderer { display: none; }"; // original pre-2024 design
+      
+    customStyles.innerHTML +=
+    "#bottom-grid .style-scope { display: none; }";  // preview future 2024 design
   }
   if (settings.comments == undefined || settings.comments == false) {
     customStyles.innerHTML += ".ytd-comments { display: none; }";
@@ -104,6 +108,12 @@ function toggleCSS() {
       customStyles.innerHTML += "#contents .ytd-rich-grid-renderer { display: none; }";
     }
   }
+  // hide videos on subscription page
+if (settings.subs == undefined || settings.subs == false) {
+  if(document.location.pathname == '/feed/subscriptions' ) { // subscription/channel pages uses the same tag and class as homepage. so make sure we're in the subs page
+    customStyles.innerHTML += "#contents .ytd-rich-grid-renderer { display: none; }";
+  }
+}
   
   if (settings.shorts == undefined || settings.shorts == false) {
     // hide Shorts section on the front page

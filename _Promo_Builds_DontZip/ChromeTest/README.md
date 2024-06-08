@@ -25,9 +25,14 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(6-8-2024) v1.46: 
+
+- New feature: Added option to show/hide videos on the subscription page.  
+- Extension now works for the possible future YouTube design.
+
 (1-10-2024) v1.45: 
 
-- New feature: Added option to show/hide videos on the front page. 
+- New feature: Added option to show/hide videos on the front page.  
 
 (12-18-2023) v1.44: 
 

@@ -13,6 +13,7 @@ var defaultSettings = {
   nextvideos: false,
   endvideos: false,
   homepage: false,
+  subs: true,
   shorts: false,
   explore: false,
 };
@@ -35,6 +36,7 @@ function storeSettings() {
       nextvideos: false,
       endvideos: false,
       homepage: false,
+      subs: false,
       shorts: false,
       explore: false,
     };
@@ -68,6 +70,9 @@ function storeSettings() {
         }
         if (item.getAttribute("data-type") == "homepage") {
           save.homepage = true;
+        }
+        if (item.getAttribute("data-type") == "subs") {
+          save.subs = true;
         }
         if (item.getAttribute("data-type") == "shorts") {
           save.shorts = true;
@@ -124,6 +129,9 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "homepage") {
       item.checked = restoredSettings.homepage;
     }
+    if (item.getAttribute("data-type") == "subs") {
+      item.checked = restoredSettings.subs;
+    }
     if (item.getAttribute("data-type") == "shorts") {
       item.checked = restoredSettings.shorts;
     }
@@ -152,5 +160,6 @@ document.getElementById("preview").addEventListener("click", storeSettings);
 document.getElementById("nextvideos").addEventListener("click", storeSettings);
 document.getElementById("endvideos").addEventListener("click", storeSettings);
 document.getElementById("homepage").addEventListener("click", storeSettings);
+document.getElementById("subs").addEventListener("click", storeSettings);
 document.getElementById("shorts").addEventListener("click", storeSettings);
 document.getElementById("explore").addEventListener("click", storeSettings);
