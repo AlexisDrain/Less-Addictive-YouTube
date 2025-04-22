@@ -16,6 +16,7 @@ var defaultSettings = {
   subs: true,
   shorts: false,
   explore: false,
+  newnessDot: false,
 };
 var settings = defaultSettings;
 
@@ -39,6 +40,7 @@ function storeSettings() {
       subs: false,
       shorts: false,
       explore: false,
+      newnessDot: false,
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
@@ -79,6 +81,9 @@ function storeSettings() {
         }
         if (item.getAttribute("data-type") == "explore") {
           save.explore = true;
+        }
+        if (item.getAttribute("data-type") == "newnessDot") {
+          save.newnessDot = true;
         }
       }
       console.log(item);
@@ -138,6 +143,9 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "explore") {
       item.checked = restoredSettings.explore;
     }
+    if (item.getAttribute("data-type") == "newnessDot") {
+      item.checked = restoredSettings.newnessDot;
+    }
   }
 }
 
@@ -163,3 +171,4 @@ document.getElementById("homepage").addEventListener("click", storeSettings);
 document.getElementById("subs").addEventListener("click", storeSettings);
 document.getElementById("shorts").addEventListener("click", storeSettings);
 document.getElementById("explore").addEventListener("click", storeSettings);
+document.getElementById("newnessDot").addEventListener("click", storeSettings);

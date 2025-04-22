@@ -15,6 +15,7 @@ var defaultSettings = {
   subs: true,
   shorts: false,
   explore: false,
+  newnessDot: false,
 };
 
 var settings;
@@ -138,6 +139,10 @@ if (settings.subs == undefined || settings.subs == false) {
     // hide filter -- these are the filters inside the channel pages (Latest, Popular, Oldest)
     //customStyles.innerHTML +=
     //  "ytd-feed-filter-chip-bar-renderer { display: none; }";
+  }
+  if (settings.newnessDot == undefined || settings.newnessDot == false) {
+    // hide newness-dot on the sidebars
+    customStyles.innerHTML += 'ytd-guide-entry-renderer[line-end-style=dot] #newness-dot.ytd-guide-entry-renderer {display: none !important;}';
   }
 }
 

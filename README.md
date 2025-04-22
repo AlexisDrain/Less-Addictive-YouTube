@@ -25,6 +25,10 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(4-22-2025) v1.47: 
+
+- New feature: Added option to show/hide the blue newness dot. Thanks AIPAL18!  
+
 (6-8-2024) v1.46: 
 
 - New feature: Added option to show/hide videos on the subscription page.  
