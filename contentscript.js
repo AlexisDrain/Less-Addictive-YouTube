@@ -56,22 +56,27 @@ function toggleCSS() {
     return;
   }
   customStyles.innerHTML = "";
-
+  // channel image class:        ytCoreImageHost yt-spec-avatar-shape__image ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleToFill ytCoreImageLoaded
+  // channel banner image class: ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
+  // Thumbnail class:            ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
-    customStyles.innerHTML += ".yt-core-image { display: none; }";
+    customStyles.innerHTML += ".ytCoreImageHost.ytCoreImageContentModeScaleAspectFill:not(.yt-spec-avatar-shape__image):not(yt-image-banner-view-model .ytCoreImageHost) { display: none !important; }";
+    customStyles.innerHTML += ".yt-core-image { display: none; }"; // deprecated
     customStyles.innerHTML +=
       ".thumbnail-container > yt-img-shadow { display: none !important; }";
   }
   if (settings.videoTime == undefined || settings.videoTime == false) {
-      customStyles.innerHTML +=
-        ".ytd-thumbnail-overlay-time-status-renderer { display: none; }"; // total time of video. Example: 3:15
+    // total time of video. Example: 3:15
+    customStyles.innerHTML += "yt-thumbnail-badge-view-model { display: none !important; }";
+      customStyles.innerHTML += ".ytd-thumbnail-overlay-time-status-renderer { display: none; }"; // deprecated
   } else {
           customStyles.innerHTML +=
     "#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
   }
   if(settings.videoWatched == undefined || settings.videoWatched == false) {
-    customStyles.innerHTML +=
-      ".ytd-thumbnail-overlay-resume-playback-renderer { display: none; }"; // red bar below video thumbnail (how much you've watched)
+    // red bar below video thumbnail (how much you've watched)
+    customStyles.innerHTML += ".ytThumbnailOverlayProgressBarHostWatchedProgressBar, .ytThumbnailOverlayProgressBarHostUseLegacyBar { display: none !important; }";
+    customStyles.innerHTML += ".ytd-thumbnail-overlay-resume-playback-renderer { display: none; }"; // deprecated
   } else {
     customStyles.innerHTML +=
 "#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
