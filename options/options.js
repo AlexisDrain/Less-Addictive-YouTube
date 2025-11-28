@@ -10,7 +10,7 @@ var defaultSettings = {
   videoWatched: true,
   sidebar: false,
   preview: false,
-  nextvideos: false,
+  nextvideos: true,
   endvideos: false,
   homepage: false,
   subs: true,
@@ -165,7 +165,7 @@ document.getElementById("videoTime").addEventListener("click", storeSettings);
 document.getElementById("videoWatched").addEventListener("click", storeSettings);
 document.getElementById("sidebar").addEventListener("click", storeSettings);
 document.getElementById("preview").addEventListener("click", storeSettings);
-document.getElementById("nextvideos").addEventListener("click", storeSettings);
+// document.getElementById("nextvideos").addEventListener("click", storeSettings);
 document.getElementById("endvideos").addEventListener("click", storeSettings);
 document.getElementById("homepage").addEventListener("click", storeSettings);
 document.getElementById("subs").addEventListener("click", storeSettings);
