@@ -28,6 +28,7 @@ function storeSettings() {
   console.log("change settings");
   function getTypes() {
     let save = {
+      // Don't change any of these!!!
       storedBefore: true,
       thumbnails: false,
       videoTime: false,
@@ -42,7 +43,7 @@ function storeSettings() {
       subs: false,
       shorts: false,
       explore: false,
-      newnessDot: true,
+      newnessDot: false,
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");

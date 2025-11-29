@@ -25,6 +25,12 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(11-29-2025) v1.49:  
+
+- Fixed broken features for a new YouTube update (November 2025), such as thumbnail video preview.
+- Removed the option "Show recommended channel & 2 videos end screen" because it is now a native YouTube feature (see "show" button on top-right of video when prompted by end screen).
+- Added option to hide the suggested videos when the user presses "V" on the keyboard during fullscreen in a video. ❌Known issue: pressing "V" also adds a gradient and removes the progress bar. It would be too invasive to YouTube's code to fix this issue, sorry. Just press "V" again to hide the gradient.
+
 (8-19-2025) v1.48: 
 
 - Fixed thumbnails breaking with new YouTube update.  
