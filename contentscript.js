@@ -11,6 +11,7 @@ var defaultSettings = {
   preview: false,
   nextvideos: true,
   endvideos: false,
+  fullscreenGrid: false,
   homepage: false,
   subs: true,
   shorts: false,
@@ -72,6 +73,8 @@ function toggleCSS() {
     cssRules += ".ytThumbnailViewModelImage .ytCoreImageHost { display: none !important; }";
     // Hide search result thumbnails
     cssRules += "ytd-video-renderer .ytCoreImageHost.ytCoreImageContentModeScaleAspectFill { display: none !important; }";
+    // Hide thumbnails in older YouTube structure (inside a#thumbnail > yt-image)
+    cssRules += "a#thumbnail > yt-image .ytCoreImageHost { display: none !important; }";
     // Hide YouTube Shorts thumbnails
     cssRules += ".shortsLockupViewModelHostThumbnail { display: none !important; }";
     cssRules += ".yt-core-image { display: none; }"; // deprecated
@@ -79,16 +82,13 @@ function toggleCSS() {
   }
 
   if (settings.preview == undefined || settings.preview == false) {
-    cssRules +=
-      "#video-preview-container .ytd-video-preview { display: none; }";
-      cssRules +=
-        "#mouseover-overlay .ytd-thumbnail { display: none; }";
-        cssRules +=
-          "#hover-overlays .ytd-thumbnail { display: none; }";
 
-        // after 2025
-        cssRules +=
-          "animated-thumbnail-overlay-view-model { display: none; }";
+    cssRules += "#video-preview-container .ytd-video-preview { display: none; }";
+    cssRules +=  "#mouseover-overlay .ytd-thumbnail { display: none; }";
+    cssRules += "#hover-overlays .ytd-thumbnail { display: none; }";
+
+    // after 2025
+    cssRules += "animated-thumbnail-overlay-view-model { display: none; }";
           
   }
 
@@ -126,9 +126,16 @@ function toggleCSS() {
   }
   */
   if (settings.endvideos == undefined || settings.endvideos == false) {
-    cssRules += ".ytp-endscreen-content { display: none; }"; // pre 2025
-    cssRules += ".ytp-fullscreen-grid-stills-container { display: none; }"; // 2025
+    // pre 2025
+    cssRules += ".ytp-endscreen-content { display: none; }";
+    // 2025: hide the grid when it appears at end of video (when NOT in fullscreen grid mode)
+    cssRules += ".html5-video-player.ended-mode .ytp-fullscreen-grid-stills-container { display: none; }";
   }
+if (settings.fullscreenGrid == undefined || settings.fullscreenGrid == false) {
+    // Hide only when in fullscreen grid mode (button was pressed)
+    cssRules += ".html5-video-player.ytp-fullscreen-grid-active:not(.ended-mode) .ytp-fullscreen-grid-stills-container { display: none; }";
+}
+
 
     // hide videos on home page
   if (settings.homepage == undefined || settings.homepage == false) {
