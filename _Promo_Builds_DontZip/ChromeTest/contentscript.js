@@ -9,13 +9,14 @@ var defaultSettings = {
   videoWatched: true,
   sidebar: false,
   preview: false,
-  nextvideos: false,
+  nextvideos: true,
   endvideos: false,
+  fullscreenGrid: false,
   homepage: false,
   subs: true,
   shorts: false,
   explore: false,
-  newnessDot: false,
+  newnessDot: true,
 };
 
 var settings;
@@ -55,100 +56,134 @@ function toggleCSS() {
     console.log("There's no Style. Abort");
     return;
   }
-  customStyles.innerHTML = "";
+  
+  // Build CSS as a string, then set it once
+  let cssRules = "";
+
   // channel image class:        ytCoreImageHost yt-spec-avatar-shape__image ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleToFill ytCoreImageLoaded
   // channel banner image class: ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
   // Thumbnail class:            ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
+  // V button:                   ytp-fullscreen-grid-buttons-container
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
-    customStyles.innerHTML += ".ytCoreImageHost.ytCoreImageContentModeScaleAspectFill:not(.yt-spec-avatar-shape__image):not(yt-image-banner-view-model .ytCoreImageHost) { display: none !important; }";
-    customStyles.innerHTML += ".yt-core-image { display: none; }"; // deprecated
-    customStyles.innerHTML +=
-      ".thumbnail-container > yt-img-shadow { display: none !important; }";
+    
+    // before 2025
+    // cssRules += ".ytCoreImageHost.ytCoreImageContentModeScaleAspectFill:not(.yt-spec-avatar-shape__image):not(yt-image-banner-view-model .ytCoreImageHost) { display: none !important; }";
+
+    // after 2025
+    // Hide regular video thumbnails but NOT animated previews
+    cssRules += ".ytThumbnailViewModelImage .ytCoreImageHost { display: none !important; }";
+    // Hide search result thumbnails
+    cssRules += "ytd-video-renderer .ytCoreImageHost.ytCoreImageContentModeScaleAspectFill { display: none !important; }";
+    // Hide thumbnails in older YouTube structure (inside a#thumbnail > yt-image)
+    cssRules += "a#thumbnail > yt-image .ytCoreImageHost { display: none !important; }";
+    // Hide YouTube Shorts thumbnails
+    cssRules += ".shortsLockupViewModelHostThumbnail { display: none !important; }";
+    cssRules += ".yt-core-image { display: none; }"; // deprecated
+    cssRules += ".thumbnail-container > yt-img-shadow { display: none !important; }"; // deprecated
   }
+
+  if (settings.preview == undefined || settings.preview == false) {
+
+    cssRules += "#video-preview-container .ytd-video-preview { display: none; }";
+    cssRules +=  "#mouseover-overlay .ytd-thumbnail { display: none; }";
+    cssRules += "#hover-overlays .ytd-thumbnail { display: none; }";
+
+    // after 2025
+    cssRules += "animated-thumbnail-overlay-view-model .ytCoreImageHost { display: none; }";
+          
+  }
+
   if (settings.videoTime == undefined || settings.videoTime == false) {
     // total time of video. Example: 3:15
-    customStyles.innerHTML += "yt-thumbnail-badge-view-model { display: none !important; }";
-      customStyles.innerHTML += ".ytd-thumbnail-overlay-time-status-renderer { display: none; }"; // deprecated
+    cssRules += "yt-thumbnail-badge-view-model { display: none !important; }";
+    cssRules += ".ytd-thumbnail-overlay-time-status-renderer { display: none; }"; // deprecated
   } else {
-          customStyles.innerHTML +=
+          cssRules +=
     "#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
   }
   if(settings.videoWatched == undefined || settings.videoWatched == false) {
     // red bar below video thumbnail (how much you've watched)
-    customStyles.innerHTML += ".ytThumbnailOverlayProgressBarHostWatchedProgressBar, .ytThumbnailOverlayProgressBarHostUseLegacyBar { display: none !important; }";
-    customStyles.innerHTML += ".ytd-thumbnail-overlay-resume-playback-renderer { display: none; }"; // deprecated
+    cssRules += ".ytThumbnailOverlayProgressBarHostWatchedProgressBar, .ytThumbnailOverlayProgressBarHostUseLegacyBar { display: none !important; }";
+    cssRules += ".ytd-thumbnail-overlay-resume-playback-renderer { display: none; }"; // deprecated
   } else {
-    customStyles.innerHTML +=
+    cssRules +=
 "#overlays { display: block !important; }"; // due to bug, having thumbnails disabled could also disable total time + red bar below thumbnail
   }
 
-  if (settings.preview == undefined || settings.preview == false) {
-    customStyles.innerHTML +=
-      "#video-preview-container .ytd-video-preview { display: none; }";
-      customStyles.innerHTML +=
-        "#mouseover-overlay .ytd-thumbnail { display: none; }";
-        customStyles.innerHTML +=
-          "#hover-overlays .ytd-thumbnail { display: none; }";
+  if (settings.comments == undefined || settings.comments == false) {
+    cssRules += ".ytd-comments { display: none; }";
   }
   if (settings.sidebar == undefined || settings.sidebar == false) {
-    customStyles.innerHTML +=
+    cssRules +=
       ".ytd-watch-next-secondary-results-renderer { display: none; }"; // original pre-2024 design
       
-    customStyles.innerHTML +=
+    cssRules +=
     "#bottom-grid .style-scope { display: none; }";  // preview future 2024 design
   }
-  if (settings.comments == undefined || settings.comments == false) {
-    customStyles.innerHTML += ".ytd-comments { display: none; }";
-  }
+  /*
   if (settings.nextvideos == undefined || settings.nextvideos == false) {
-    customStyles.innerHTML +=
+    cssRules +=
       ".ytp-ce-video { display: none; } .ytp-ce-channel { display: none; }";
   }
+  */
   if (settings.endvideos == undefined || settings.endvideos == false) {
-    customStyles.innerHTML += ".ytp-endscreen-content { display: none; }";
+    // pre 2025
+    cssRules += ".ytp-endscreen-content { display: none; }";
+    // 2025: hide the grid when it appears at end of video (when NOT in fullscreen grid mode)
+    cssRules += ".html5-video-player.ended-mode .ytp-fullscreen-grid-stills-container { display: none; }";
   }
+if (settings.fullscreenGrid == undefined || settings.fullscreenGrid == false) {
+    // Hide only when in fullscreen grid mode (button was pressed)
+    cssRules += ".html5-video-player.ytp-fullscreen-grid-active:not(.ended-mode) .ytp-fullscreen-grid-stills-container { display: none; }";
+    // cssRules += ".ytp-fullscreen-grid-expand-button ytp-button { display: none; }"; // arrow button
+}
+
 
     // hide videos on home page
   if (settings.homepage == undefined || settings.homepage == false) {
     if(document.location.pathname == '/' ) { // subscription/channel pages uses the same tag and class as homepage. so make sure we're in the homepage
-      customStyles.innerHTML += "#contents .ytd-rich-grid-renderer { display: none; }";
+      cssRules += "#contents .ytd-rich-grid-renderer { display: none; }";
     }
   }
   // hide videos on subscription page
 if (settings.subs == undefined || settings.subs == false) {
   if(document.location.pathname == '/feed/subscriptions' ) { // subscription/channel pages uses the same tag and class as homepage. so make sure we're in the subs page
-    customStyles.innerHTML += "#contents .ytd-rich-grid-renderer { display: none; }";
+    cssRules += "#contents .ytd-rich-grid-renderer { display: none; }";
   }
 }
   
   if (settings.shorts == undefined || settings.shorts == false) {
     // hide Shorts section on the front page
-    customStyles.innerHTML += ".ytd-rich-section-renderer { display: none; }";
+    cssRules += ".ytd-rich-section-renderer { display: none; }";
     // hide Shorts on the sidebars
-    customStyles.innerHTML += '[aria-label="Shorts"] { display: none; }';
-    customStyles.innerHTML += '[title="Shorts"] { display: none !important; }';
+    cssRules += '[aria-label="Shorts"] { display: none; }';
+    cssRules += '[title="Shorts"] { display: none !important; }';
     // hide Shorts on channel pages
-    customStyles.innerHTML +=
+    cssRules +=
       ":nth-child(3 of .tp-yt-paper-tabs > tp-yt-paper-tab) { display: none; }";
-    customStyles.innerHTML += "ytd-reel-shelf-renderer { display: none; }";
+    cssRules += "ytd-reel-shelf-renderer { display: none; }";
   }
   if (settings.explore == undefined || settings.explore == false) {
     // hide Explore on the sidebars
-    customStyles.innerHTML += '[aria-label="Explore"] { display: none; }';
-    customStyles.innerHTML += '[title="Explore"] { display: none !important; }';
+    cssRules += '[aria-label="Explore"] { display: none; }';
+    cssRules += '[title="Explore"] { display: none !important; }';
     // hide sidebar sections
-    customStyles.innerHTML +=
-      ".ytd-guide-renderer:nth-child(3) { display: none; }";
-    customStyles.innerHTML +=
+    // cssRules +=
+    //  ".ytd-guide-renderer:nth-child(3) { display: none; }";
+    cssRules +=
       ".ytd-guide-renderer:nth-child(4) { display: none; }";
     // hide filter -- these are the filters inside the channel pages (Latest, Popular, Oldest)
-    //customStyles.innerHTML +=
+    //cssRules +=
     //  "ytd-feed-filter-chip-bar-renderer { display: none; }";
   }
   if (settings.newnessDot == undefined || settings.newnessDot == false) {
     // hide newness-dot on the sidebars
-    customStyles.innerHTML += 'ytd-guide-entry-renderer[line-end-style=dot] #newness-dot.ytd-guide-entry-renderer {display: none !important;}';
+    cssRules += 'ytd-guide-entry-renderer[line-end-style=dot] #newness-dot.ytd-guide-entry-renderer {display: none !important;}';
   }
+
+
+  // Set all CSS at once using textContent instead of innerHTML
+  customStyles.textContent = cssRules;
 }
 
 /*

@@ -17,7 +17,7 @@ var defaultSettings = {
   subs: true,
   shorts: false,
   explore: false,
-  newnessDot: false,
+  newnessDot: true,
 };
 var settings = defaultSettings;
 
@@ -42,7 +42,7 @@ function storeSettings() {
       subs: false,
       shorts: false,
       explore: false,
-      newnessDot: false,
+      newnessDot: true,
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");

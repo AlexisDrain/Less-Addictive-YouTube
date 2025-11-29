@@ -10,13 +10,14 @@ var defaultSettings = {
   videoWatched: true,
   sidebar: false,
   preview: false,
-  nextvideos: false,
+  nextvideos: true,
   endvideos: false,
+  fullscreenGrid: false,
   homepage: false,
   subs: true,
   shorts: false,
   explore: false,
-  newnessDot: false,
+  newnessDot: true,
 };
 var settings = defaultSettings;
 
@@ -36,11 +37,12 @@ function storeSettings() {
       comments: false,
       nextvideos: false,
       endvideos: false,
+      fullscreenGrid: false,
       homepage: false,
       subs: false,
       shorts: false,
       explore: false,
-      newnessDot: false,
+      newnessDot: true,
     };
 
     const checkboxes = document.querySelectorAll(".data-types [type=checkbox]");
@@ -69,6 +71,9 @@ function storeSettings() {
         }
         if (item.getAttribute("data-type") == "endvideos") {
           save.endvideos = true;
+        }
+        if (item.getAttribute("data-type") == "fullscreenGrid") {
+          save.fullscreenGrid = true;
         }
         if (item.getAttribute("data-type") == "homepage") {
           save.homepage = true;
@@ -131,6 +136,9 @@ function updateUI(restoredSettings) {
     if (item.getAttribute("data-type") == "endvideos") {
       item.checked = restoredSettings.endvideos;
     }
+    if (item.getAttribute("data-type") == "fullscreenGrid") {
+      item.checked = restoredSettings.fullscreenGrid;
+    }
     if (item.getAttribute("data-type") == "homepage") {
       item.checked = restoredSettings.homepage;
     }
@@ -165,8 +173,9 @@ document.getElementById("videoTime").addEventListener("click", storeSettings);
 document.getElementById("videoWatched").addEventListener("click", storeSettings);
 document.getElementById("sidebar").addEventListener("click", storeSettings);
 document.getElementById("preview").addEventListener("click", storeSettings);
-document.getElementById("nextvideos").addEventListener("click", storeSettings);
+// document.getElementById("nextvideos").addEventListener("click", storeSettings);
 document.getElementById("endvideos").addEventListener("click", storeSettings);
+document.getElementById("fullscreenGrid").addEventListener("click", storeSettings);
 document.getElementById("homepage").addEventListener("click", storeSettings);
 document.getElementById("subs").addEventListener("click", storeSettings);
 document.getElementById("shorts").addEventListener("click", storeSettings);

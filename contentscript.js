@@ -16,7 +16,7 @@ var defaultSettings = {
   subs: true,
   shorts: false,
   explore: false,
-  newnessDot: false,
+  newnessDot: true,
 };
 
 var settings;
@@ -63,6 +63,7 @@ function toggleCSS() {
   // channel image class:        ytCoreImageHost yt-spec-avatar-shape__image ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleToFill ytCoreImageLoaded
   // channel banner image class: ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
   // Thumbnail class:            ytCoreImageHost ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill ytCoreImageLoaded
+  // V button:                   ytp-fullscreen-grid-buttons-container
   if (settings.thumbnails == undefined || settings.thumbnails == false) {
     
     // before 2025
@@ -88,7 +89,7 @@ function toggleCSS() {
     cssRules += "#hover-overlays .ytd-thumbnail { display: none; }";
 
     // after 2025
-    cssRules += "animated-thumbnail-overlay-view-model { display: none; }";
+    cssRules += "animated-thumbnail-overlay-view-model .ytCoreImageHost { display: none; }";
           
   }
 
@@ -134,6 +135,7 @@ function toggleCSS() {
 if (settings.fullscreenGrid == undefined || settings.fullscreenGrid == false) {
     // Hide only when in fullscreen grid mode (button was pressed)
     cssRules += ".html5-video-player.ytp-fullscreen-grid-active:not(.ended-mode) .ytp-fullscreen-grid-stills-container { display: none; }";
+    // cssRules += ".ytp-fullscreen-grid-expand-button ytp-button { display: none; }"; // arrow button
 }
 
 
