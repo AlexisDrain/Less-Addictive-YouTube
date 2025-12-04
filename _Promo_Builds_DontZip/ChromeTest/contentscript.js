@@ -114,11 +114,12 @@ function toggleCSS() {
     cssRules += ".ytd-comments { display: none; }";
   }
   if (settings.sidebar == undefined || settings.sidebar == false) {
-    cssRules +=
-      ".ytd-watch-next-secondary-results-renderer { display: none; }"; // original pre-2024 design
-      
-    cssRules +=
-    "#bottom-grid .style-scope { display: none; }";  // preview future 2024 design
+    // cssRules += ".ytd-watch-next-secondary-results-renderer { display: none; }"; // original pre-2024 design
+    // cssRules += "#bottom-grid .style-scope { display: none; }";  // preview future 2024 design
+
+    // Catches both logged-in and logged-out
+    cssRules += "ytd-watch-next-secondary-results-renderer { display: none !important; }";
+    cssRules += "#related { display: none !important; }";
   }
   /*
   if (settings.nextvideos == undefined || settings.nextvideos == false) {
