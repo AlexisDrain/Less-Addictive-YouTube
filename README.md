@@ -25,6 +25,10 @@ List of his changes: https://github.com/AlexisDrain/Less-Addictive-YouTube/pull/
 
 ## Changelog  
 
+(12-04-2025) v1.50:  
+
+- Fixed bug: "Show suggested videos sidebar" now works when logged out.
+
 (11-29-2025) v1.49:  
 
 - Fixed broken features for a new YouTube update (November 2025), such as thumbnail video preview.
